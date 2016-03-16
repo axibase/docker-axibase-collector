@@ -1,6 +1,6 @@
 FROM java:openjdk-7-jre
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
-ENV version 12440
+ENV version 12448
 
 #configure users
 RUN adduser --disabled-password --quiet --gecos "" axibase;
