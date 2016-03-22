@@ -7,7 +7,7 @@ RUN adduser --disabled-password --quiet --gecos "" axibase;
 
 
 RUN wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
-    && tar -xzvf axibase-collector-*.tar.gz -C /opt/
+    && tar -xzvf axibase-collector-*.tar.gz -C /opt/ && rm axibase-collector-*.tar.gz
 
 RUN chmod +x /opt/axibase-collector/bin/start_container.sh &&\
     chown -R axibase /opt/axibase-collector
