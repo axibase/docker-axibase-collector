@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
-ENV version 12511
+ENV version 12513
 
 #configure users
 RUN adduser --disabled-password --quiet --gecos "" axibase && apt-get update && apt-get install -y openjdk-7-jre wget;
