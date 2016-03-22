@@ -1,9 +1,9 @@
-FROM java:openjdk-7-jre
+FROM ubuntu:14.04
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
 ENV version 12500
 
 #configure users
-RUN adduser --disabled-password --quiet --gecos "" axibase;
+RUN adduser --disabled-password --quiet --gecos "" axibase && apt-get update && apt-get install -y openjdk-7-jre;
 
 
 RUN wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
