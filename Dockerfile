@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
-ENV version 12521
+ENV version 12527
 
 #configure system 
 RUN apt-get update && apt-get install -y openjdk-7-jdk wget;
