@@ -3,7 +3,7 @@ MAINTAINER ATSD Developers <dev-atsd@axibase.com>
 ENV version 12513
 
 #configure system 
-RUN apt-get update && apt-get install -y openjdk-7-jre wget;
+RUN apt-get update && apt-get install -y openjdk-7-jdk wget;
 
 
 RUN wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
