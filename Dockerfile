@@ -1,6 +1,6 @@
 FROM java:openjdk-7-jre
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
-ENV version 12606
+ENV version 12608
 #metadata
 LABEL com.axibase.vendor="Axibase Corporation" \
     com.axibase.product="Axibase Collector" \
