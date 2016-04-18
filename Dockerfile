@@ -1,4 +1,4 @@
-FROM java:openjdk-7-jre
+FROM ubuntu:14.04
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
 ENV version 12799
 #metadata
