@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y openjdk-7-jdk wget;
 RUN wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
     && tar -xzvf axibase-collector-*.tar.gz -C /opt/ && rm axibase-collector-*.tar.gz
 
+#expose warfile
+RUN mkdir -p /opt/axibase-collector/exploded/webapp \
+    && cd /opt/axibase-collector/exploded/webapp && jar -xvf ../../lib/axibase-collector.war
 
 EXPOSE 9443
 
