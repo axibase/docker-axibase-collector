@@ -7,21 +7,14 @@ LABEL com.axibase.vendor="Axibase Corporation" \
     com.axibase.code="AC" \
     com.axibase.revision="${version}"
 
-#configure system 
-RUN apt-get update && apt-get install -y openjdk-7-jdk wget;
-
-
 # Add crontab file in the cron directory
 ADD crontab /etc/cron.d/root
 
-# Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/root
+#configure system 
+RUN apt-get update && apt-get install -y openjdk-7-jdk wget && chmod 0644 /etc/cron.d/root && crontab /etc/cron.d/root;
 
-RUN crontab /etc/cron.d/root
-
-# Run the command on container startup
-CMD cron -f &
-
+# run cron on startup
+CMD cron -f &;
 
 #install collector
 RUN wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
