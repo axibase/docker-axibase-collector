@@ -7,11 +7,12 @@ LABEL com.axibase.vendor="Axibase Corporation" \
     com.axibase.code="AC" \
     com.axibase.revision="${version}"
 
-# Add crontab file in the cron directory
-ADD crontab /etc/cron.d/root
-
-#configure system 
-RUN apt-get update && apt-get install -y openjdk-7-jdk wget && chmod 0644 /etc/cron.d/root && crontab /etc/cron.d/root;
+#configure system
+RUN apt-get update && apt-get install --no-install-recommends -y openjdk-7-jre wget unzip \
+    && rm -rf /var/lib/apt/lists/* \
+    && touch /etc/cron.d/root \
+    && printf "# An empty line is required at the end of this file for a valid cron file\n" > /etc/cron.d/root \
+    && chmod 0644 /etc/cron.d/root && crontab /etc/cron.d/root;
 
 # run cron on startup
 CMD cron -f &;
@@ -22,12 +23,10 @@ RUN wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
 
 #expose warfile
 RUN mkdir -p /opt/axibase-collector/exploded/webapp \
-    && cd /opt/axibase-collector/exploded/webapp && jar -xvf ../../lib/axibase-collector.war
+    && unzip /opt/axibase-collector/lib/axibase-collector.war -d /opt/axibase-collector/exploded/webapp
 
 EXPOSE 9443
 
 VOLUME ["/opt/axibase-collector"]
 
 ENTRYPOINT ["/bin/bash","/opt/axibase-collector/bin/entrypoint.sh"]
-
-
