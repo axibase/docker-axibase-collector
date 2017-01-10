@@ -31,5 +31,3 @@ VOLUME ["/opt/axibase-collector"]
 
 ENTRYPOINT ["/bin/bash","/opt/axibase-collector/bin/entrypoint.sh"]
 
-
-
