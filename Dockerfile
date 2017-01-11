@@ -19,10 +19,6 @@ RUN wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
 RUN mkdir -p /opt/axibase-collector/exploded/webapp \
     && unzip /opt/axibase-collector/lib/axibase-collector.war -d /opt/axibase-collector/exploded/webapp
 
-
-ADD entrypoint.sh /opt/axibase-collector/bin
-RUN chmod +x /opt/axibase-collector/bin/entrypoint.sh
-
 #expose UI https port
 EXPOSE 9443
 
