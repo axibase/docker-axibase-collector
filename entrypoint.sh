@@ -26,7 +26,7 @@ printf "# Empty line\n" >> /etc/cron.d/root
 crontab /etc/cron.d/root
 #Enable system logging
 rsyslogd
-
+#Start cron
 cron -f &
 ./start-collector.sh "$args"
 
