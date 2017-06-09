@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
 ENV version 16481
 #metadata
@@ -8,7 +8,7 @@ LABEL com.axibase.vendor="Axibase Corporation" \
     com.axibase.revision="${version}"
 
 #install jre, install cron
-RUN apt-get update && apt-get install --no-install-recommends -y postfix openjdk-7-jre wget unzip \
+RUN apt-get update && apt-get install --no-install-recommends -y postfix openjdk-8-jre wget unzip \
     && rm -rf /var/lib/apt/lists/*
 
 #install collector
