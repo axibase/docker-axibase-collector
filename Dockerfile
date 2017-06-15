@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
-ENV version 16513
+ENV version 16514
 #metadata
 LABEL com.axibase.vendor="Axibase Corporation" \
     com.axibase.product="Axibase Collector" \
