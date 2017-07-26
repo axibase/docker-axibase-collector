@@ -9,7 +9,7 @@ LABEL com.axibase.vendor="Axibase Corporation" \
     com.axibase.revision="${version}"
 
 #install jre, install cron
-RUN apt-get update && apt-get install --no-install-recommends -y postfix openjdk-8-jre wget unzip \
+RUN apt-get update && apt-get install --no-install-recommends -y postfix openjdk-8-jre wget unzip cron \
     && rm -rf /var/lib/apt/lists/*
 
 #install collector
