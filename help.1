@@ -1,0 +1,136 @@
+.TH "axibase/collector:16893" "Axibase Corporation" "July 31, 2017"  ""
+
+
+.SH DESCRIPTION
+.PP
+Axibase Collector is a standalone Java application that collects statistics, properties, messages, and files from external data sources and uploads them into Axibase Time Series Database using its API.
+
+
+.SH USAGE
+.SH Start Container
+.PP
+Execute the command as described above.
+
+.PP
+.RS
+
+.nf
+docker run \\
+ \-\-detach \\
+ \-\-publish\-all \\
+ \-\-restart=always \\
+ \-\-name=axibase\-collector \\
+ axibase/collector:16893
+
+.fi
+.RE
+
+.PP
+To automatically configure a connection to the Axibase Time Series Database, add the \fB\fC\-atsd\-url\fR parameter containing the ATSD hostname and https port (default 8443), as well as 
+\[la]https://github.com/axibase/atsd/blob/master/administration/collector-account.md\[ra] credentials:
+
+.PP
+.RS
+
+.nf
+docker run \\
+ \-\-detach \\
+ \-\-publish\-all \\
+ \-\-restart=always \\
+ \-\-name=axibase\-collector \\
+ axibase/collector:16893 \\
+  \-atsd\-url=https://collector\-user:collector\-password@atsd\_host:atsd\_https\_port
+
+.fi
+.RE
+
+.PP
+If the user name or password contains a \fB\fC$\fR, \fB\fC\&\fR, \fB\fC#\fR, or \fB\fC!\fR character, escape it with backslash \fB\fC\\\fR.
+
+.PP
+The password must contain at least \fBsix\fP (6) characters and is subject to the following 
+\[la]https://github.com/axibase/atsd/blob/master/administration/user-authentication.md#password-requirements\[ra].
+
+.PP
+For example, for user \fB\fCadm\-dev\fR with the password \fB\fCmy$pwd\fR sending data to ATSD at 
+\[la]https://10.102.0.6:8443\[ra], specify:
+
+.PP
+.RS
+
+.nf
+docker run \\
+ \-\-detach \\
+ \-\-publish\-all \\
+ \-\-restart=always \\
+ \-\-name=axibase\-collector \\
+ axibase/collector:16893 \\
+  \-atsd\-url=https://adm\-dev:my\\$pwd@10.102.0.6:8443
+
+.fi
+.RE
+
+.SH Check Installation
+.PP
+It may take up to 5 minutes to initialize the application.
+
+.PP
+.RS
+
+.nf
+docker exec \-it axibase\-collector tail \-f /opt/axibase\-collector/logs/axibase\-collector.log
+
+.fi
+.RE
+
+.PP
+Wait until the following message appears:
+
+.PP
+.RS
+
+.PP
+\fIFrameworkServlet 'dispatcher': initialization completed.\fP
+.RE
+
+.PP
+This message indicates that the initial configuration is complete.
+
+.SH Validation
+.PP
+.RS
+
+.nf
+docker ps | grep axibase\-collector
+
+.fi
+.RE
+
+.PP
+.RS
+
+.nf
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
+ee15099d9f88        axibase/collector   "/bin/bash /opt/axiba"   33 seconds ago      Up 32 seconds       0.0.0.0:32769\->9443/tcp   axibase\-collector
+
+.fi
+.RE
+
+.PP
+Take note of the public https port assigned to axibase\-collector container, i.e. \fB32769\fP in the example above.
+
+.SH Launch Parameters.TS
+allbox;
+\fBName\fP  \fBRequired\fP  \fBDescription\fP 
+\fB\fC\-\-detach\fR		Yes		Run container in background and print container id.	
+
+\fB\fC\-\-publish\-all\fR		No		Publish exposed https port (9443) to a random port.	
+
+\fB\fC\-\-restart\fR		No		Auto\-restart policy. \fINot supported in all Docker Engine versions.\fP	
+
+\fB\fC\-\-name\fR		No		Assign a host\-unique name to the container.	
+
+.TE
+
+.PP
+To bind the collector to a particular port instead of a random one, replace \fB\fC\-\-publish\-all\fR with \fB\fC\-\-publish 10443:9443\fR, where the first number indicates an available port on the Docker host.
