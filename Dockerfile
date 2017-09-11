@@ -1,9 +1,8 @@
 FROM ubuntu:16.04
-MAINTAINER ATSD Developers <dev-atsd@axibase.com>
-ENV version 17261
-ENV LANG en_US.UTF-8
+ENV version="17261" LANG="en_US.UTF-8"
 #metadata
-LABEL com.axibase.vendor="Axibase Corporation" \
+LABEL maintainer="ATSD Developers <dev-atsd@axibase.com>" \
+    com.axibase.vendor="Axibase Corporation" \
     com.axibase.product="Axibase Collector" \
     com.axibase.code="AC" \
     com.axibase.revision="${version}"
