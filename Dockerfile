@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y postfix openjdk
     && wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
     && tar -xzvf axibase-collector-*.tar.gz -C /opt/ && rm axibase-collector-*.tar.gz \
     && mkdir -p /opt/axibase-collector/exploded/webapp \
-    && unzip /opt/axibase-collector/lib/axibase-collector.war -d /opt/axibase-collector/exploded/webapp
+    && unzip /opt/axibase-collector/lib/axibase-collector.war -d /opt/axibase-collector/exploded/webapp \
+    && wget https://raw.githubusercontent.com/axibase/docker-axibase-collector/master/entrypoint.sh -P /opt/axibase-collector/bin/
 
 #expose UI https port
 EXPOSE 9443
