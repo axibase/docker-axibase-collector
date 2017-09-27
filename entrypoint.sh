@@ -2,6 +2,7 @@
 
 SCRIPT=$(readlink -f $0)
 SCRIPTS_HOME="`dirname $SCRIPT`"
+STOP_SIGNAL="-1"
 executing="true"
 
 owner=`stat -c %U "${SCRIPTS_HOME}"`
@@ -28,10 +29,12 @@ crontab /etc/cron.d/root
 cron -f &
 ./start-collector.sh "$args"
 
+trap 'executing="false"' SIGTERM
+
 while [ "$executing" = "true" ]; do
     sleep 1
-    #trap 'echo "kill signal handled, stopping processes ..."; executing="false"' SIGINT SIGTERM
 done
-#echo "SIGTERM handled ( docker stop ). Stopping services ..."
-#./stop-collector.sh
-#exit 0
+
+echo "Stopping services ..."
+./stop-collector.sh "$STOP_SIGNAL"
+exit 0
