@@ -19,22 +19,71 @@ if [ `whoami` != "$owner" ]; then
 fi
 
 cd ${SCRIPTS_HOME}
-echo "Starting services ..."
+echo "Starting collection service ..."
+
+for i in $args; do
+    case $i in
+        -atsd-host=*)
+        ATSD_HOST="${i#*=}"
+        shift
+        ;;
+        -atsd-url=*)
+        ATSD_URL="${i#*=}"
+        shift
+        ;;
+        *)
+        # other options
+        ;;
+    esac
+done
+
+error="false"
+function validate_hostname {
+    if [[ $1 == *"_"* ]]; then
+        echo "Error: hostname in the '$2' contains underscore"
+        error="true"
+    fi
+}
+
+function validate_password {
+    if [[ ${#1} < 6 ]]; then
+        echo "Error: password in the '$2' contains less than 6 characters"
+        error="true"
+    fi
+}
+
+validate_hostname ${ATSD_HOST} "-atsd-host"
+
+URL_PATTERN="^(http[s]?|unix):\/\/(.*):(.*)@([^:\/[:space:]]+)(:([[:digit:]]+))?((\/[A-Za-z0-9_\-]*)*)\$"
+if [[ ${ATSD_URL} =~ $URL_PATTERN ]]; then
+    validate_password ${BASH_REMATCH[3]} "-atsd-url"
+    validate_hostname ${BASH_REMATCH[4]} "-atsd-url"
+fi
+
+if [ "$error" = "true" ]; then
+    echo "Collection service failed to start"
+    exit 0
+fi
+
 #Create empty cron job
 touch /etc/cron.d/root
 chmod +x /etc/cron.d/root
 printf "# Empty line\n" >> /etc/cron.d/root
 crontab /etc/cron.d/root
+
 #Start cron
 cron -f &
+
+#Start collector
 ./start-collector.sh "$args"
 
+#Waiting for stop signal
 trap 'executing="false"' SIGTERM
-
 while [ "$executing" = "true" ]; do
     sleep 1
 done
 
-echo "Stopping services ..."
+#Stop collector
+echo "Stopping collection service ..."
 ./stop-collector.sh "$STOP_SIGNAL"
 exit 0
