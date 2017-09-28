@@ -17,7 +17,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y openjdk-8-jre w
     && tar -xzvf axibase-collector-*.tar.gz -C /opt/ && rm axibase-collector-*.tar.gz \
     && mkdir -p /opt/axibase-collector/exploded/webapp \
     && unzip /opt/axibase-collector/lib/axibase-collector.war -d /opt/axibase-collector/exploded/webapp \
-    && mv /tmp/entrypoint.sh /opt/axibase-collector/bin/
+    && mv /tmp/entrypoint.sh /opt/axibase-collector/bin/ \
+    && /opt/axibase-collector/bin/start-collector.sh && /opt/axibase-collector/bin/stop-collector.sh \
+    && rm -rf /opt/axibase-collector/logs
 
 #expose UI https port
 EXPOSE 9443
