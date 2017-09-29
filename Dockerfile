@@ -8,7 +8,7 @@ LABEL maintainer="ATSD Developers <dev-atsd@axibase.com>" \
     com.axibase.revision="${version}"
 
 #entrypoint script
-COPY entrypoint.sh /tmp/entrypoint.sh
+COPY entrypoint.sh preinit.sh /tmp/
 
 #install jre, cron, collector, explode (unpack) war file to speed up inital startup
 RUN apt-get update && apt-get install --no-install-recommends -y openjdk-8-jre wget unzip cron nano net-tools \
@@ -18,8 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y openjdk-8-jre w
     && mkdir -p /opt/axibase-collector/exploded/webapp \
     && unzip /opt/axibase-collector/lib/axibase-collector.war -d /opt/axibase-collector/exploded/webapp \
     && mv /tmp/entrypoint.sh /opt/axibase-collector/bin/ \
-    && /opt/axibase-collector/bin/start-collector.sh && /opt/axibase-collector/bin/stop-collector.sh \
-    && rm -rf /opt/axibase-collector/logs
+    && /bin/bash /tmp/preinit.sh
 
 #expose UI https port
 EXPOSE 9443
