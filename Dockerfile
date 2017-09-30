@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y openjdk-8-jre w
     && mkdir -p /opt/axibase-collector/exploded/webapp \
     && unzip /opt/axibase-collector/lib/axibase-collector.war -d /opt/axibase-collector/exploded/webapp \
     && mv /tmp/entrypoint.sh /opt/axibase-collector/bin/ \
-    && /bin/bash /tmp/preinit.sh
+    && /tmp/preinit.sh
 
 #expose UI https port
 EXPOSE 9443
