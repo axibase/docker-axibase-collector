@@ -85,6 +85,15 @@ You should see 'start completed' message at the end of the log:
 
 To bind the collector to a particular port instead of a random one, replace `--publish-all` with `--publish 10443:9443`, where the first number indicates an available port on the Docker host.
 
+## Environment Variables
+
+| **Name** | **Required** | **Description** |
+|:---|:---|:---|
+|`ATSD_URL` | No | URL (protocol://host:port) for the Axibase Time Series Database connection.|
+|`COLLECTOR_USER_NAME` | No | User name for the [data collector](https://github.com/axibase/atsd/blob/master/administration/collector-rw-account.md) account. |
+|`COLLECTOR_USER_PASSWORD` | No | [Password](https://github.com/axibase/atsd/blob/master/administration/user-authentication.md#password-requirements) for the data collector account.|
+|`DOCKER_HOSTNAME` | No | Hostname of the Docker host where Axibase Collector container is running.|
+
 ## Additional Parameters
 
 * [Job Autostart](https://github.com/axibase/axibase-collector/blob/master/job-autostart.md)
