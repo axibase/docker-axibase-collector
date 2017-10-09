@@ -89,9 +89,10 @@ To bind the collector to a particular port instead of a random one, replace `--p
 
 | **Name** | **Required** | **Description** |
 |:---|:---|:---|
-|`--env COLLECTOR_USER_NAME` | No | User name for a data collector account. |
-|`--env COLLECTOR_USER_PASSWORD` | No | [Password](https://github.com/axibase/atsd-docs/blob/master/administration/user-authentication.md#password-requirements) for a data collector account.|
-|`--env ATSD_URL` | No | URL for a connection to the Axibase Time Series Database.|
+|`ATSD_URL` | No | URL (protocol://host:port) for the Axibase Time Series Database connection.|
+|`COLLECTOR_USER_NAME` | No | User name for the [data collector](https://github.com/axibase/atsd/blob/master/administration/collector-rw-account.md) account. |
+|`COLLECTOR_USER_PASSWORD` | No | [Password](https://github.com/axibase/atsd/blob/master/administration/user-authentication.md#password-requirements) for the data collector account.|
+|`DOCKER_HOSTNAME` | No | Hostname of the Docker host where Axibase Collector container is running.|
 
 ## Additional Parameters
 
