@@ -1,6 +1,6 @@
-% axibase/collector:16893
+% registry.connect.redhat.com/axibase/collector:17626
 % Axibase Corporation
-% July 31, 2017
+% October 17, 2017
 
 # DESCRIPTION
 Axibase Collector is a standalone Java application that collects statistics, properties, messages, and files from external data sources and uploads them into Axibase Time Series Database using its API. 
@@ -13,10 +13,10 @@ Execute the command as described above.
 ```properties
 docker run \
  --detach \
- --publish-all \
+ --publish 9443:9443 \
  --restart=always \
  --name=axibase-collector \
- axibase/collector:16893
+ registry.connect.redhat.com/axibase/collector:17626
 ```
 
 To automatically configure a connection to the Axibase Time Series Database, add the `-atsd-url` parameter containing the ATSD hostname and https port (default 8443), as well as [collector account](https://github.com/axibase/atsd/blob/master/administration/collector-account.md) credentials:
@@ -24,10 +24,10 @@ To automatically configure a connection to the Axibase Time Series Database, add
 ```properties
 docker run \
  --detach \
- --publish-all \
+ --publish 9443:9443 \
  --restart=always \
  --name=axibase-collector \
- axibase/collector:16893 \
+ registry.connect.redhat.com/axibase/collector:17626 \
   -atsd-url=https://collector-user:collector-password@atsd_host:atsd_https_port
 ```
 
@@ -40,10 +40,10 @@ For example, for user `adm-dev` with the password `my$pwd` sending data to ATSD 
 ```properties
 docker run \
  --detach \
- --publish-all \
+ --publish 9443:9443 \
  --restart=always \
  --name=axibase-collector \
- axibase/collector:16893 \
+ registry.connect.redhat.com/axibase/collector:17626 \
   -atsd-url=https://adm-dev:my\$pwd@10.102.0.6:8443
 ```
 
@@ -69,9 +69,8 @@ docker ps | grep axibase-collector
 ```
 
 ```
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
-ee15099d9f88        axibase/collector   "/bin/bash /opt/axiba"   33 seconds ago      Up 32 seconds       0.0.0.0:32769->9443/tcp   axibase-collector
-```
+CONTAINER ID        IMAGE                                                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+e0056ff08b8a        registry.connect.redhat.com/axibase/collector:17626   "/bin/bash /opt/axiba"   7 minutes ago       Up 7 minutes        0.0.0.0:9443->9443/tcp   axibase-collector```
 
 Take note of the public https port assigned to axibase-collector container, i.e. **32769** in the example above.
 

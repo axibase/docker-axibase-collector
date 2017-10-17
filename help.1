@@ -1,4 +1,4 @@
-.TH "axibase/collector:16893" "Axibase Corporation" "July 31, 2017"  ""
+.TH "registry.connect.redhat.com/axibase/collector:17626" "Axibase Corporation" "October 17, 2017"  ""
 
 
 .SH DESCRIPTION
@@ -17,10 +17,10 @@ Execute the command as described above.
 .nf
 docker run \\
  \-\-detach \\
- \-\-publish\-all \\
+ \-\-publish 9443:9443 \\
  \-\-restart=always \\
  \-\-name=axibase\-collector \\
- axibase/collector:16893
+ registry.connect.redhat.com/axibase/collector:17626
 
 .fi
 .RE
@@ -35,10 +35,10 @@ To automatically configure a connection to the Axibase Time Series Database, add
 .nf
 docker run \\
  \-\-detach \\
- \-\-publish\-all \\
+ \-\-publish 9443:9443 \\
  \-\-restart=always \\
  \-\-name=axibase\-collector \\
- axibase/collector:16893 \\
+ registry.connect.redhat.com/axibase/collector:17626 \\
   \-atsd\-url=https://collector\-user:collector\-password@atsd\_host:atsd\_https\_port
 
 .fi
@@ -61,10 +61,10 @@ For example, for user \fB\fCadm\-dev\fR with the password \fB\fCmy$pwd\fR sendin
 .nf
 docker run \\
  \-\-detach \\
- \-\-publish\-all \\
+ \-\-publish 9443:9443 \\
  \-\-restart=always \\
  \-\-name=axibase\-collector \\
- axibase/collector:16893 \\
+ registry.connect.redhat.com/axibase/collector:17626 \\
   \-atsd\-url=https://adm\-dev:my\\$pwd@10.102.0.6:8443
 
 .fi
@@ -110,9 +110,8 @@ docker ps | grep axibase\-collector
 .RS
 
 .nf
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
-ee15099d9f88        axibase/collector   "/bin/bash /opt/axiba"   33 seconds ago      Up 32 seconds       0.0.0.0:32769\->9443/tcp   axibase\-collector
-
+CONTAINER ID        IMAGE                                                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+e0056ff08b8a        registry.connect.redhat.com/axibase/collector:17626   "/bin/bash /opt/axiba"   7 minutes ago       Up 7 minutes        0.0.0.0:9443->9443/tcp   axibase-collector
 .fi
 .RE
 
