@@ -10,7 +10,7 @@ ${COLLECTOR_HOME}/bin/stop-collector.sh
 rm -rfv ${COLLECTOR_HOME}/logs ${COLLECTOR_HOME}conf/keystores/client.keystore
 
 # Download Derby to get ij tool
-DERBY_DOWNLOAD_LINK='http://mirror.linux-ia64.org/apache/db/derby/db-derby-10.12.1.1/db-derby-10.12.1.1-lib.zip'
+DERBY_DOWNLOAD_LINK='http://archive.apache.org/dist/db/derby/db-derby-10.12.1.1/db-derby-10.12.1.1-lib.zip'
 wget -O /tmp/derby.zip "${DERBY_DOWNLOAD_LINK}"
 
 # Cleanup tables
