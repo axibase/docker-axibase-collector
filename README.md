@@ -87,8 +87,6 @@ To bind the collector to a particular port instead of a random one, replace `--p
 
 ## Environment Variables
 
-### Connection Variables
-
 | **Name** | **Required** | **Description** |
 |:---|:---|:---|
 |`ATSD_URL` | No | URL (`protocol://host:port`) for the Axibase Time Series Database connection.|
