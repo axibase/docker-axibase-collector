@@ -46,7 +46,7 @@ function validate_hostname {
 }
 
 function validate_password {
-    if [[ ${#1} < 6 ]]; then
+    if [[ ${#1} -lt 6 ]]; then
         echo "Error: Password in '$2' contains less than 6 characters."
         error="true"
     fi
