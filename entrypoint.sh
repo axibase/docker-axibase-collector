@@ -4,7 +4,7 @@ SCRIPT=$(readlink -f $0)
 SCRIPTS_HOME="`dirname $SCRIPT`"
 STOP_SIGNAL="-1"
 
-USERINFO_CHARS_REGEX="[[:alnum:]%\.\-_~!\$'()*+,;=]"
+USERINFO_CHARS_REGEX="[[:alnum:]%\._~!\$'()*+,;=-]"
 USERINFO_FIELD_REGEX="($USERINFO_CHARS_REGEX+)(:$USERINFO_CHARS_REGEX+)?@"
 IPV6_REGEX="[0-9a-fA-F:]+"
 AUTHORITY_ALL_CHARS_REGEX="^:\/[:space:]@"
@@ -191,6 +191,29 @@ function validate_url {
         exit 1
     fi
 }
+
+function validate_docker_socket {
+    echo -n "Checking docker socket..."
+    check_res=`java -classpath "../exploded/webapp/WEB-INF/classes:../exploded/webapp/WEB-INF/lib/*" com.axibase.collector.util.UnixSocketUtil /var/run/docker.sock 2>&1`;
+    if ! [[ -z "$check_res" ]]; then
+        if [ "$check_res" == "OK" ]; then
+            echo "OK"
+        elif [[ "$check_res" == "FAILED"* ]]; then
+            echo "$check_res"
+        elif [[ "$check_res" == "Unable to read"* ]]; then
+            echo
+            print_error "$check_res"
+            exit 1
+        else
+            echo
+            echo "$check_res"
+        fi
+    fi
+}
+
+if [ -e "/var/run/docker.sock" ]; then
+    validate_docker_socket
+fi
 
 if ! [[ -z "$ATSD_URL" ]]; then
     validate_url "$ATSD_URL"
