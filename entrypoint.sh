@@ -42,8 +42,15 @@ for i in $args; do
         ATSD_URL="${i#*=}"
         shift
         ;;
-        -job-enable=docker-socket)
-        DOCKER_SOCKET_JOB=true
+        -job-enable=*)
+        ENABLED_JOBS="${i#*=}"
+        ENABLED_JOBS="${ENABLED_JOBS//,/ }"
+        for job in ${ENABLED_JOBS}; do
+            if [ "$job" = docker-socket ]; then
+                DOCKER_SOCKET_JOB=true
+                break
+            fi
+        done
         shift
         ;;
         *)
@@ -215,7 +222,7 @@ function validate_docker_socket {
     fi
 }
 
-if [ -e "/var/run/docker.sock" ] && [ ${DOCKER_SOCKET_JOB} = true ]; then
+if [ -e "/var/run/docker.sock" ] && [ "$DOCKER_SOCKET_JOB" = true ]; then
     validate_docker_socket
 fi
 
