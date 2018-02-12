@@ -95,9 +95,8 @@ To bind the collector to a particular port instead of a random one, replace `--p
 |`ATSD_SERVICE_HOST` | No | Axibase Time Series Database DNS name. |
 |`ATSD_SERVICE_PORT_HTTPS` | No | ATSD https port. Default: 8443. |
 |`ATSD_SERVICE_PORT_TCP` | No | ATSD TCP port for [network commands](https://github.com/axibase/atsd/blob/master/api/network#network-api). Default: 8081.|
-
 |`DOCKER_HOSTNAME` | No | Hostname of the Docker host where Axibase Collector container is running.|
-|`JAVA_OPTS` | No| Java VM options.|
+|`JAVA_OPTS` | No| Java VM options.<br>By default the collector starts with an option -Xmx256m|
 
 For example, for user `adm-dev` with the password `my$pwd` sending data to ATSD at https://10.102.0.6:8443, specify:
 
