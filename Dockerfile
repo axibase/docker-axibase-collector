@@ -11,7 +11,7 @@ LABEL maintainer="ATSD Developers <dev-atsd@axibase.com>" \
 COPY entrypoint.sh preinit.sh /tmp/
 
 #install jre, cron, collector, explode (unpack) war file to speed up inital startup
-RUN apt-get update && apt-get install --no-install-recommends -y openjdk-8-jre wget unzip cron nano iproute2 \
+RUN apt-get update && apt-get install --no-install-recommends -y openjdk-8-jdk wget unzip cron nano iproute2 \
     && rm -rf /var/lib/apt/lists/*
     
 RUN wget https://www.axibase.com/public/axibase-collector-v${version}.tar.gz \
