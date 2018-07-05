@@ -34,3 +34,4 @@ java org.apache.derby.tools.ij /tmp/cleanup_tables.sql
 # Remove temporary files
 rm $(readlink -f "${BASH_SOURCE[0]}")
 rm -rfv /tmp/*
+rm -rf /opt/axibase-collector/exploded
