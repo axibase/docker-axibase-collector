@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-ENV version=19652 LANG=en_US.UTF-8
+ENV version=19659 LANG=en_US.UTF-8
 #metadata
 LABEL maintainer="ATSD Developers <dev-atsd@axibase.com>" \
     com.axibase.vendor="Axibase Corporation" \
