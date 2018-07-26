@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/rhel7
 MAINTAINER ATSD Developers <dev-atsd@axibase.com>
 
-ENV version 17626
+ENV version 19751
 ENV LANG en_US.UTF-8
 #metadata
 LABEL com.axibase.vendor="Axibase Corporation" \
