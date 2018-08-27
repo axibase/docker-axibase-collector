@@ -28,7 +28,7 @@ fi
 cd ${SCRIPTS_HOME}
 echo "Starting Axibase Collector ..."
 
-for i in $args; do
+for i in ${args}; do
     case $i in
         -atsd-tcp-host=*)
         ATSD_TCP_HOST="${i#*=}"
@@ -40,6 +40,10 @@ for i in $args; do
         ;;
         -atsd-url=*)
         ATSD_URL="${i#*=}"
+        shift
+        ;;
+        -atsd-url-secondary=*)
+        ATSD_URL_SECONDARY="${i#*=}"
         shift
         ;;
         -job-enable=*)
@@ -228,6 +232,10 @@ fi
 
 if ! [[ -z "$ATSD_URL" ]]; then
     validate_url "$ATSD_URL"
+fi
+
+if ! [[ -z "$ATSD_URL_SECONDARY" ]]; then
+    validate_url "$ATSD_URL_SECONDARY"
 fi
 
 if ! [[ -z "$ATSD_TCP_HOST" ]]; then
