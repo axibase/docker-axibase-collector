@@ -24,7 +24,7 @@ docker run \
  axibase/collector:latest
 ```
 
-To automatically configure a connection to the Axibase Time Series Database, add the `-atsd-url` parameter containing the ATSD hostname and https port (default 8443), as well as [collector account](https://axibase.com/docs/atsd/administration/collector-account.html) credentials:
+To automatically configure a connection to ATSD, add the `-atsd-url` parameter containing the ATSD hostname and https port (default 8443), as well as [collector account](https://axibase.com/docs/atsd/administration/collector-account.html) credentials:
 
 ```properties
 docker run \
