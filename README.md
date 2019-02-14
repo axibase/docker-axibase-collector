@@ -2,7 +2,7 @@
 
 ## Overview
 
-The [Axibase Collector](https://github.com/axibase/axibase-collector/blob/master/README.md) is a Java-based ETL application that queries external data sources on a defined schedule and uploads the data as series, properties, messages, and files into the [Axibase Time Series Database](http://axibase.com/products/axibase-time-series-database/) (ATSD).
+The [Axibase Collector](https://axibase.com/docs/axibase-collector/) is a Java-based ETL application that queries external data sources on a defined schedule and uploads the data as series, properties, messages, and files into the [Axibase Time Series Database](http://axibase.com/products/axibase-time-series-database/) (ATSD).
 
 ## Image Summary
 
@@ -13,7 +13,7 @@ The [Axibase Collector](https://github.com/axibase/axibase-collector/blob/master
 
 ## Start Container
 
-> Using Collector to monitor Docker? Launch container in privileged mode as described in this [document](https://github.com/axibase/axibase-collector/blob/master/jobs/docker.md#local-collection).
+> Using Collector to monitor Docker? Launch container in privileged mode as described in this [document](https://axibase.com/docs/axibase-collector/jobs/docker.html#local-installation).
 
 ```properties
 docker run \
@@ -24,7 +24,7 @@ docker run \
  axibase/collector:latest
 ```
 
-To automatically configure a connection to the Axibase Time Series Database, add the `-atsd-url` parameter containing the ATSD hostname and https port (default 8443), as well as [collector account](https://github.com/axibase/atsd/blob/master/administration/collector-account.md) credentials:
+To automatically configure a connection to the Axibase Time Series Database, add the `-atsd-url` parameter containing the ATSD hostname and https port (default 8443), as well as [collector account](https://axibase.com/docs/atsd/administration/collector-account.html) credentials:
 
 ```properties
 docker run \
@@ -38,7 +38,7 @@ docker run \
 
 If the user name or password contains a `$`, `&`, `#`, or `!` character, escape it with backslash `\`.
 
-The password must contain at least **six** (6) characters and is subject to the following [requirements](https://github.com/axibase/atsd/blob/master/administration/user-authentication.md#password-requirements).
+The password must contain at least **six** (6) characters and is subject to the following [requirements](https://axibase.com/docs/atsd/administration/user-authentication.html#password-requirements).
 
 For example, for user `adm-dev` with the password `my$pwd` sending data to ATSD at https://10.102.0.6:8443, specify:
 
@@ -90,11 +90,11 @@ To bind the collector to a particular port instead of a random one, replace `--p
 | **Name** | **Required** | **Description** |
 |:---|:---|:---|
 |`ATSD_URL` | No | URL (`protocol://host:port`) for the Axibase Time Series Database connection.|
-|`COLLECTOR_USER_NAME` | No | User name for the [data collector](https://github.com/axibase/atsd/blob/master/administration/collector-rw-account.md) account. |
-|`COLLECTOR_USER_PASSWORD` | No | [Password](https://github.com/axibase/atsd/blob/master/administration/user-authentication.md#password-requirements) for the data collector account.|
+|`COLLECTOR_USER_NAME` | No | User name for the [data collector](https://axibase.com/docs/atsd/administration/collector-rw-account.html) account. |
+|`COLLECTOR_USER_PASSWORD` | No | [Password](https://axibase.com/docs/atsd/administration/user-authentication.html#password-requirements) for the data collector account.|
 |`ATSD_SERVICE_HOST` | No | Axibase Time Series Database DNS name. |
 |`ATSD_SERVICE_PORT_HTTPS` | No | ATSD https port. Default: 8443. |
-|`ATSD_SERVICE_PORT_TCP` | No | ATSD TCP port for [network commands](https://github.com/axibase/atsd/blob/master/api/network#network-api). Default: 8081.|
+|`ATSD_SERVICE_PORT_TCP` | No | ATSD TCP port for [network commands](https://axibase.com/docs/atsd/api/network/). Default: 8081.|
 |`DOCKER_HOSTNAME` | No | Hostname of the Docker host where Axibase Collector container is running.|
 |`JAVA_OPTS` | No| Java VM options.<br>By default the collector starts with an option -Xmx256m|
 
@@ -126,7 +126,7 @@ docker run \
 
 ## Additional Parameters
 
-* [Job Autostart](https://github.com/axibase/axibase-collector/blob/master/job-autostart.md)
+* [Job Autostart](https://axibase.com/docs/axibase-collector/job-autostart.html)
 
 ## Troubleshooting
 
@@ -155,6 +155,6 @@ Take note of the public https port assigned to axibase-collector container, i.e.
 
 ## Login
 
-Open https://docker_hostname:32768 in your browser and create an [administrator account](https://github.com/axibase/axibase-collector/blob/master/configure-administrator-account.md).
+Open https://docker_hostname:32768 in your browser and create an [administrator account](https://axibase.com/docs/axibase-collector/configure-administrator-account.html).
 
 `docker_hostname` is the hostname or IP address of the Docker host and **32768** is the external port number assigned to the Collector container in the previous step.
